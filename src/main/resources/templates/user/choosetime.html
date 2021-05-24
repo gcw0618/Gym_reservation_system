@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="" th:href="@{/bootstrap-4.3.1-dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="" th:href="@{/Flat-UI-master/dist/css/flat-ui.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="../lib/layui-v2.5.5/css/layui.css" media="all">
+    <script src="" th:src="@{/jquery/jquery-3.4.1.min.js}"></script>
+    <script src="" th:src="@{/bootstrap-4.3.1-dist/js/bootstrap.min.js}"></script>
+    <script src="" th:src="@{/Flat-UI-master/dist/js/vendor/jquery.min.js}"></script>
+    <script src="" th:src="@{/Flat-UI-master/dist/js/flat-ui.min.js}"></script>
+    <script src="" th:src="@{/Layui/laydate/laydate.js}"></script>
+    <script src="../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <title>运动场馆预约——爱运动</title>
+
+    <script>
+        function check() {
+            if(!confirm("确认预定?")){
+                window.event.returnValue=false;
+            }
+            else{
+                alert('预定成功');
+            }
+        }
+        
+        $(function () {
+            $("#searchdate").click(function () {
+                var choosedate=$("#choosedate").val();
+                var url="/user/get_appointment_time_by_time";
+                var args={"choosedate":choosedate};
+                $.post(url,args,function (data) {
+                    if (data=="success"){
+
+                    }
+                    else{
+                        data=JSON.parse(data);
+                        $("#time_start_1").text(data.time_start_1);$("#time_end_1").text(data.time_end_1);
+                        $("#time_start_2").text(data.time_start_2);$("#time_end_2").text(data.time_end_2);
+                        $("#time_start_3").text(data.time_start_3);$("#time_end_3").text(data.time_end_3);
+                        $("#time_start_4").text(data.time_start_4);$("#time_end_4").text(data.time_end_4);
+                        $("#time_start_5").text(data.time_start_5);$("#time_end_5").text(data.time_end_5);
+                        $("#time_start_6").text(data.time_start_6);$("#time_end_6").text(data.time_end_6);
+                        $("#time_start_7").text(data.time_start_7);$("#time_end_7").text(data.time_end_7);
+                        $("#time_start_8").text(data.time_start_8);$("#time_end_8").text(data.time_end_8);
+                        $("#time_start_9").text(data.time_start_9);$("#time_end_9").text(data.time_end_9);
+                        $("#time_start_10").text(data.time_start_10);$("#time_end_10").text(data.time_end_10);
+                        $("#time_start_11").text(data.time_start_11);$("#time_end_11").text(data.time_end_11);
+                        $("#time_start_12").text(data.time_start_12);$("#time_end_12").text(data.time_end_12);
+                        $("#time_start_13").text(data.time_start_13);$("#time_end_13").text(data.time_end_13);
+                        $("#time_start_14").text(data.time_start_14);$("#time_end_14").text(data.time_end_14);
+                        $("#time_start_15").text(data.time_start_15);$("#time_end_15").text(data.time_end_15);
+                        $("#time_1").text(data.time_1);$("#time_8").text(data.time_8);$("#time_15").text(data.time_15);
+                        $("#time_2").text(data.time_2);$("#time_9").text(data.time_9);
+                        $("#time_3").text(data.time_3);$("#time_10").text(data.time_10);
+                        $("#time_4").text(data.time_4);$("#time_11").text(data.time_11);
+                        $("#time_5").text(data.time_5);$("#time_12").text(data.time_12);
+                        $("#time_6").text(data.time_6);$("#time_13").text(data.time_13);
+                        $("#time_7").text(data.time_7);$("#time_14").text(data.time_14);
+                        var local=window.location.host;
+                        var href1="http://"+local+"/user/appointment_site?start_time="+data.time_start_1+"&end_time="+data.time_end_1;
+                        var href2="http://"+local+"/user/appointment_site?start_time="+data.time_start_2+"&end_time="+data.time_end_2;
+                        var href3="http://"+local+"/user/appointment_site?start_time="+data.time_start_3+"&end_time="+data.time_end_3;
+                        var href4="http://"+local+"/user/appointment_site?start_time="+data.time_start_4+"&end_time="+data.time_end_4;
+                        var href5="http://"+local+"/user/appointment_site?start_time="+data.time_start_5+"&end_time="+data.time_end_5;
+                        var href6="http://"+local+"/user/appointment_site?start_time="+data.time_start_6+"&end_time="+data.time_end_6;
+                        var href7="http://"+local+"/user/appointment_site?start_time="+data.time_start_7+"&end_time="+data.time_end_7;
+                        var href8="http://"+local+"/user/appointment_site?start_time="+data.time_start_8+"&end_time="+data.time_end_8;
+                        var href9="http://"+local+"/user/appointment_site?start_time="+data.time_start_9+"&end_time="+data.time_end_9;
+                        var href10="http://"+local+"/user/appointment_site?start_time="+data.time_start_10+"&end_time="+data.time_end_10;
+                        var href11="http://"+local+"/user/appointment_site?start_time="+data.time_start_11+"&end_time="+data.time_end_11;
+                        var href12="http://"+local+"/user/appointment_site?start_time="+data.time_start_12+"&end_time="+data.time_end_12;
+                        var href13="http://"+local+"/user/appointment_site?start_time="+data.time_start_13+"&end_time="+data.time_end_13;
+                        var href14="http://"+local+"/user/appointment_site?start_time="+data.time_start_14+"&end_time="+data.time_end_14;
+                        var href15="http://"+local+"/user/appointment_site?start_time="+data.time_start_15+"&end_time="+data.time_end_15;
+                        $("#href_1").attr('href',href1); $("#href_8").attr('href',href8); $("#href_15").attr('href',href15);
+                        $("#href_2").attr('href',href2); $("#href_9").attr('href',href9);
+                        $("#href_3").attr('href',href3); $("#href_10").attr('href',href10);
+                        $("#href_4").attr('href',href4); $("#href_11").attr('href',href11);
+                        $("#href_5").attr('href',href5); $("#href_12").attr('href',href12);
+                        $("#href_6").attr('href',href6); $("#href_13").attr('href',href13);
+                        $("#href_7").attr('href',href7); $("#href_14").attr('href',href14);
+                        var appoint="预定";var start="开始";var end="结束";var choose="选择";var tag="可选择的时间段";
+                        $("#tag").text(tag);
+                        $("#href_1").text(appoint);$("#href_2").text(appoint);$("#href_3").text(appoint);$("#href_4").text(appoint);$("#href_5").text(appoint);
+                        $("#href_6").text(appoint);$("#href_7").text(appoint);$("#href_8").text(appoint);$("#href_9").text(appoint);$("#href_10").text(appoint);
+                        $("#href_11").text(appoint);$("#href_12").text(appoint);$("#href_13").text(appoint);$("#href_14").text(appoint);$("#href_15").text(appoint);
+                        $("#start").text(start);$("#end").text(end);$("#choose").text(choose);
+                    }
+                })
+            });
+        })
+
+    </script>
+    <style type="text/css">
+        .table>tbody>tr>td{
+            border:0px;
+        }
+        p{
+            color: #00b3ee;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container" style="margin-top:50px">
+    <div class="layui-row">
+        <div class="layui-col-xs3">
+            <div class="grid-demo grid-demo-bg1">
+                <input type="text" class="layui-input" id="choosedate" name="choosedate" placeholder="请选择日期">
+            </div>
+        </div>
+        <div class="layui-col-xs3">
+            <div class="grid-demo">
+                <button class="btn btn-primary" id="searchdate">查询</button>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <span><p id="tag" text=""></span>
+        <table class="table">
+            <tbody>
+            <tr>
+                <td><p id="start" text=""/></td>
+                <td><p id="end" text=""/></td>
+                <td><p id="choose" text=""/></td>
+            </tr>
+            <tr>
+                <td><p1 id="time_start_1"  th:text="${time_start_1}"/></td>
+                <td><p1 id="time_end_1"  th:text="${time_end_1}"/></td>
+                <td><a href="" id="href_1" text="" onclick="check()"></a></td>
+            </tr>
+            <tr>
+                <td><p1 id="time_start_2"  th:text="${time_start_2}"/></td>
+                <td><p1 id="time_end_2"  th:text="${time_end_2}"/></td>
+                <td><a href="" id="href_2" text="" onclick="check()"></a></td>
+            </tr>
+            <tr>
+                <td><p1 id="time_start_3"  th:text="${time_start_3}"/></td>
+                <td><p1 id="time_end_3"  th:text="${time_end_3}"/></td>
+                <td><a href="" id="href_3" text="" onclick="check()"></a></td>
+            </tr>
+            <tr>
+                <td><p1 id="time_start_4"  th:text="${time_start_4}"/></td>
+                <td><p1 id="time_end_4"  th:text="${time_end_4}"/></td>
+                <td><a href="" id="href_4" text="" onclick="check()"></a></td>
+            </tr>
+            <tr>
+                <td><p1 id="time_start_5"  th:text="${time_start_5}"/></td>
+                <td><p1 id="time_end_5"  th:text="${time_end_5}"/></td>
+                <td><a href="" id="href_5" text="" onclick="check()"></a></td>
+            </tr>
+            <tr>
+                <td><p1 id="time_start_6"  th:text="${time_start_6}"/></td>
+                <td><p1 id="time_end_6"  th:text="${time_end_6}"/></td>
+                <td><a href="" id="href_6" text="" onclick="check()"></a></td>
+            </tr>
+            <tr>
+                <td><p1 id="time_start_7"  th:text="${time_start_7}"/></td>
+                <td><p1 id="time_end_7"  th:text="${time_end_7}"/></td>
+                <td><a href="" id="href_7" text="" onclick="check()"></a></td>
+            </tr>
+            <tr>
+                <td><p1 id="time_start_8"  th:text="${time_start_8}"/></td>
+                <td><p1 id="time_end_8"  th:text="${time_end_8}"/></td>
+                <td><a href="" id="href_8" text="" onclick="check()"></a></td>
+            </tr>
+            <tr>
+                <td><p1 id="time_start_9"  th:text="${time_start_9}"/></td>
+                <td><p1 id="time_end_9"  th:text="${time_end_9}"/></td>
+                <td><a href="" id="href_9" text="" onclick="check()"></a></td>
+            </tr>
+            <tr>
+                <td><p1 id="time_start_10"  th:text="${time_start_10}"/></td>
+                <td><p1 id="time_end_10"  th:text="${time_end_10}"/></td>
+                <td><a href="" id="href_10" text="" onclick="check()"></a></td>
+            </tr>
+            <tr>
+                <td><p1 id="time_start_11"  th:text="${time_start_11}"/></td>
+                <td><p1 id="time_end_11"  th:text="${time_end_11}"/></td>
+                <td><a href="" id="href_11" text="" onclick="check()"></a></td>
+            </tr>
+            <tr>
+                <td><p1 id="time_start_12"  th:text="${time_start_12}"/></td>
+                <td><p1 id="time_end_12"  th:text="${time_end_12}"/></td>
+                <td><a href="" id="href_12" text="" onclick="check()"></a></td>
+            </tr>
+            <tr>
+                <td><p1 id="time_start_13"  th:text="${time_start_13}"/></td>
+                <td><p1 id="time_end_13"  th:text="${time_end_13}"/></td>
+                <td><a href="" id="href_13" text="" onclick="check()"></a></td>
+            </tr>
+            <tr>
+                <td><p1 id="time_start_14"  th:text="${time_start_14}"/></td>
+                <td><p1 id="time_end_14"  th:text="${time_end_14}"/></td>
+                <td><a href="" id="href_14" text="" onclick="check()"></a></td>
+            </tr>
+            <tr>
+                <td><p1 id="time_start_15"  th:text="${time_start_15}"/></td>
+                <td><p1 id="time_end_15"  th:text="${time_end_15}"/></td>
+                <td><a href="" id="href_15" text="" onclick="check()"></a></td>
+            </tr>
+            
+            </tbody>
+        </table>
+        
+        
+        <!--<a href="" id="href_1"><p id="time_1"  th:text="${time_1}"></p></a>
+        <a href="" id="href_2"><p id="time_2"  th:text="${time_2}"></p></a>
+        <a href="" id="href_3"><p id="time_3"  th:text="${time_3}"></p></a>
+        <a href="" id="href_4"><p id="time_4"  th:text="${time_4}"></p></a>
+        <a href="" id="href_5"><p id="time_5"  th:text="${time_5}"></p></a>
+        <a href="" id="href_6"><p id="time_6"  th:text="${time_6}"></p></a>
+        <a href="" id="href_7"><p id="time_7"  th:text="${time_7}"></p></a>
+        <a href="" id="href_8"><p id="time_8"  th:text="${time_8}"></p></a>
+        <a href="" id="href_9"><p id="time_9"  th:text="${time_9}"></p></a>
+        <a href="" id="href_10"><p id="time_10"  th:text="${time_10}"></p></a>
+        <a href="" id="href_11"><p id="time_11"  th:text="${time_11}"></p></a>
+        <a href="" id="href_12"><p id="time_12"  th:text="${time_12}"></p></a>
+        <a href="" id="href_13"><p id="time_13"  th:text="${time_13}"></p></a>
+        <a href="" id="href_14"><p id="time_14"  th:text="${time_14}"></p></a>
+        <a href="" id="href_15"><p id="time_15"  th:text="${time_15}"></p></a>-->
+        
+        
+        <!--<p id="time_start_1"  th:text="${time_start_1}+' ~ '+${time_end_1}"> </p>
+        <p id="time_start_2"  th:text="${time_start_2}+' ~ '+${time_end_2}"> </p>-->
+        <!--<p id="time_start_2"  th:text="${time_start_2}"> ~ </p><p id="time_end_2"  th:text="${time_end_2}"></p>-->
+        
+        <!--<p id="time_start_3"  th:text="${time_start_3}"> ~ </p><p id="time_end_3"  th:text="${time_end_3}"></p>
+        <p id="time_start_4"  th:text="${time_start_4}"> ~ </p><p id="time_end_4"  th:text="${time_end_4}"></p>
+        <p id="time_start_5"  th:text="${time_start_5}"> ~ </p><p id="time_end_5"  th:text="${time_end_5}"></p>
+        <p id="time_start_6"  th:text="${time_start_6}"> ~ </p><p id="time_end_6"  th:text="${time_end_6}"></p>
+        <p id="time_start_7"  th:text="${time_start_7}"> ~ </p><p id="time_end_7"  th:text="${time_end_7}"></p>
+        <p id="time_start_8"  th:text="${time_start_8}"> ~ </p><p id="time_end_8"  th:text="${time_end_8}"></p>
+        <p id="time_start_9"  th:text="${time_start_9}"> ~ </p><p id="time_end_9"  th:text="${time_end_9}"></p>
+        <p id="time_start_10"  th:text="${time_start_10}"> ~ </p><p id="time_end_10"  th:text="${time_end_10}"></p>
+        <p id="time_start_11"  th:text="${time_start_11}"> ~ </p><p id="time_end_11"  th:text="${time_end_11}"></p>
+        <p id="time_start_12"  th:text="${time_start_12}"> ~ </p><p id="time_end_12"  th:text="${time_end_12}"></p>
+        <p id="time_start_13"  th:text="${time_start_13}"> ~ </p><p id="time_end_13"  th:text="${time_end_13}"></p>
+        <p id="time_start_14"  th:text="${time_start_14}"> ~ </p><p id="time_end_14"  th:text="${time_end_14}"></p>
+        <p id="time_start_15"  th:text="${time_start_15}"> ~ </p><p id="time_end_15"  th:text="${time_end_15}"></p>-->
+        
+    </div>
+    
+</div>
+
+<br>
+<div class="row justify-content-center">
+    <div class="align-self-center">
+        <a th:href="@{/user/site(sitename=${sitename})}"><button class="btn btn-danger fui-cross">返回</button></a>
+    </div>
+</div>
+
+<script>
+    laydate.render({
+        elem: '#choosedate'
+        ,min: 0
+        ,max: 7
+    });
+    
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate ;
+        return currentdate;
+    }
+
+    function getNextFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate() +5;
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate;
+        return currentdate;
+    }
+
+    lay('.loan-date').each(function () {
+        var mintime=getNowFormatDate()+' 09:30:00';
+        var maxtime=getNextFormatDate()+' 17:30:00';
+        laydate.render({
+            elem: this
+            ,type: 'datetime'
+            ,min: mintime
+            ,max: maxtime
+            ,trigger: 'click'
+        });
+    });
+</script>
+
+
+</body>
+</html>

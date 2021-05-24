@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>一兆炜德</title>
+    <link href="" th:href="@{/Layui/layui/css/layui.css}"  rel="stylesheet"  media="all">
+    <link href="" th:href="@{/css/index.css}"  rel="stylesheet"  media="all">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <!-- 标题 -->
+        <div class="layui-logo">运动场馆管理系统</div>
+        <!-- 顶部右侧菜单 -->
+        <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
+            <li class="layui-nav-item">
+                <a href="" ><i class="layui-icon layui-icon-speaker"></i>消息中心<span class="layui-badge">9</span></a>
+            </li>
+
+            <li class="layui-nav-item" lay-unselect="">
+                <a href="javascript:;"><img src="https://source.unsplash.com/QAB-WJcbgJk/60x60q" class="layui-nav-img"><span th:text="${username}"></span>
+                    </p><span class="layui-nav-more"></span>
+                </a>
+                <dl class="layui-nav-child">
+                   <!-- <dd><a data-id="userdata" data-title="基本资料" data-url="/user/userdata" href="javascript:;" class="site-demo-active" >基本资料</a></dd>-->
+                    <dd><a data-id="changepassword" data-title="修改密码" data-url="/admin/changepassword" href="javascript:;" class="site-demo-active" >修改密码</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="/admin/login">退出</a></li>
+        </ul>
+    </div>
+
+    <!-- 左侧菜单栏 -->
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="menus">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">场馆信息</a>
+                    <dl class="layui-nav-child">
+                        <tr th:each="list:${sitename_list}">
+                            <dd>
+                                <a th:data-id="${list.sitename_en}" th:data-title="${list.sitename_zh}" th:data-url="'/admin/site?sitename='+${list.sitename_en}" href="javascript:;" class="site-demo-active" data-type="tabAdd"><span th:text="${list.sitename_zh}"/></a>
+                            </dd>
+                        </tr>
+                        <dd>
+                            <a data-id="adminsite" data-title="编辑场馆信息" data-url="/admin/admingym" href="javascript:;" class="site-demo-active" data-type="tabAdd">编辑场馆信息</a>
+                        </dd>
+                        <!--<dd>
+                            <a data-id="adminviewappointment" data-title="查看预约情况" data-url="/admin/viewappointment" href="javascript:;" class="site-demo-active" data-type="tabAdd">查看预约情况</a>
+                        </dd>-->
+                    </dl>
+                </li>
+            </ul>
+            <ul class="layui-nav layui-nav-tree" lay-filter="menus">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">预约管理</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a data-id="adminviewappointment" data-title="查看待完成预约" data-url="/admin/viewappointment" href="javascript:;" class="site-demo-active" data-type="tabAdd">查看待完成预约</a>
+                        </dd>
+                        <dd>
+                            <a data-id="adminviewcompletedappointment" data-title="查看已完成预约" data-url="/admin/view_completed_appointment" href="javascript:;" class="site-demo-active" data-type="tabAdd">查看已完成预约</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- 多标签及内容 -->
+    <div class="layui-body"> <!--style="bottom: 0;" id="tabs_div">-->
+        <div class="layui-admin-pagetabs">
+            <div class="layui-tab tab layui-tab-brief" lay-allowClose="true" lay-filter="tabs">
+                <ul class="layui-tab-title layui-bg-white" id="tabs">
+                    <li lay-id="index" class="layui-this"><i class="layui-icon layui-icon-home"></i> 首页</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <iframe class="layui-admin-iframe" frameborder="0" src="/admin/home" height="100%" style="width:100%;"></iframe>   <!-- home页面-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部固定区域 -->
+    <div class="layui-footer">
+        <span class="padding-5"></span><a target="_blank" href="https://github.com/gcw0618">My Github: github.com/gcw0618</a>
+    </div>
+
+</div>
+<script src="" th:src="@{/Layui/layui/layui.all.js}"></script>
+<script src="" th:src="@{/Layui/layui/js/tabrightmenu.js}"></script>
+<script src="" th:src="@{/js/index.js}"></script>
+</body>
+</html>

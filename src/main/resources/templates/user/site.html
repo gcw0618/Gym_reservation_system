@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="" th:href="@{/bootstrap-4.3.1-dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="" th:href="@{/Flat-UI-master/dist/css/flat-ui.min.css}" rel="stylesheet"/>
+    <script src="" th:src="@{/jquery/jquery-3.4.1.min.js}"></script>
+    <script src="" th:src="@{/bootstrap-4.3.1-dist/js/bootstrap.min.js}"></script>
+    <script src="" th:src="@{/Flat-UI-master/dist/js/vendor/jquery.min.js}"></script>
+    <script src="" th:src="@{/Flat-UI-master/dist/js/flat-ui.min.js}"></script>
+    <script src="" th:src="@{/Layui/laydate/laydate.js}"></script>
+    <title>运动场馆预约——爱运动</title>
+
+    <style>
+        .btn-primary {
+            color: #fff;
+            background-color: #211abc;
+        }
+    </style>
+
+</head>
+<body>
+
+
+<div class="container">
+    <div class="row">
+        <tr th:each="list:${site_list}">
+            <div class="col-lg-3 col-md-4">
+                <img class="img-responsive" th:src="@{${list.sitepic}}" style="width:200px;height:200px;" />
+                <div class="card-body">
+                    <!--<h5 class="card-title" th:text="${list.sitenum}"></h5>-->
+                    <p class="card-text" th:text="'场地号：'+${list.sitenum}"></p>
+                    <p class="card-text" th:text="${list.siteprice}+'元/小时'"></p>
+                    <a th:href="@{/user/choosetime(sitename=${list.sitename},sitenum=${list.sitenum},siteprice=${list.siteprice})}" class="btn btn-primary">选择时间</a>
+                </div>
+            </div>
+        </tr>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /
+
+  
+
+spring:
+  datasource:
+    username: root
+    password: 990618
+    url: jdbc:mysql://47.100.67.69:3400/short_term?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+    #连接池的配置信息
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,log4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+    
+  thymeleaf:
+    cache: false
+
+#指定MyBatis配置文件
+mybatis:
+  config-location: classpath:mybatis_config.xml
+  mapper-locations: classpath:mapper/*.xml

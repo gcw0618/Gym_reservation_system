@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="" th:href="@{/bootstrap-4.3.1-dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="" th:href="@{/Flat-UI-master/dist/css/flat-ui.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="../lib/layui-v2.5.5/css/layui.css" media="all">
+    <script src="" th:src="@{/jquery/jquery-3.4.1.min.js}"></script>
+    <script src="" th:src="@{/bootstrap-4.3.1-dist/js/bootstrap.min.js}"></script>
+    <script src="" th:src="@{/Flat-UI-master/dist/js/vendor/jquery.min.js}"></script>
+    <script src="" th:src="@{/Flat-UI-master/dist/js/flat-ui.min.js}"></script>
+    <script src="" th:src="@{/Layui/laydate/laydate.js}"></script>
+    <script src="../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <title>运动场馆预约——爱运动</title>
+</head>
+<body>
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="col-lg-6">
+        <div class="p-5">
+            <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">个人信息</h1>
+            </div>
+            <form class="user" method="post" id="test_form" th:action="@{/user/alter_data}" >
+                <div class="form-group">
+                    <p>邮箱</p>
+                    <input type="text" name="email" class="form-control " id="email" disabled="disabled" th:value="${user.email}" >
+                </div>
+                <div class="form-group">
+                    <p>用户名</p>
+                    <input type="text" name="username" class="form-control " id="username" th:value="${user.username}" placeholder="Enter new username">
+                </div>
+                <div class="form-group">
+                    <p>电话</p>
+                    <input type="text" name="phonenumber" class="form-control " id="phonenumber" th:value="${user.phonenumber}" placeholder="Enter new phonename">
+                </div>
+                <button type="submit" class="btn btn-primary  btn-block" lay-submit="" onclick="submitConfirm(this)" lay-filter="submitConfirm">提交</button>
+                <!--<button type="submit" class="btn btn-primary  btn-block" onclick="submitConfirm()">提交</button>-->
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    layui.use(['form','jquery'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            layer = layui.layer;
+        form.on('submit(submitConfirm)', function (data) {
+            data = data.field;
+            var username=document.getElementById("username").value.trim();
+            var phonenumber=document.getElementById("phonenumber").value.trim();
+            $.get(
+                "/user/alter_data",
+                "username=" + username+"&phonenumber=" + phonenumber,
+                function (data) {
+                    if (data == true) {
+                        layer.msg('修改成功', function () {
+                            window.location = '/user/userdata';
+                        });
+                    } else {
+                        layer.msg('修改失败');
+                        // $("#checkloginInfo").html('<font color=\'red\'>用户名或密码错误!</font>');
+                    }
+                }
+            )
+        });
+    });
+</script>
+
+
+</body>
+</html>

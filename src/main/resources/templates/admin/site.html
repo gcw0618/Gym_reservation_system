@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="" th:href="@{/bootstrap-4.3.1-dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="" th:href="@{/Flat-UI-master/dist/css/flat-ui.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="../lib/layui-v2.5.5/css/layui.css" media="all">
+    <script src="" th:src="@{/jquery/jquery-3.4.1.min.js}"></script>
+    <script src="" th:src="@{/bootstrap-4.3.1-dist/js/bootstrap.min.js}"></script>
+    <script src="" th:src="@{/Flat-UI-master/dist/js/vendor/jquery.min.js}"></script>
+    <script src="" th:src="@{/Flat-UI-master/dist/js/flat-ui.min.js}"></script>
+    <script src="" th:src="@{/Layui/laydate/laydate.js}"></script>
+    <script src="../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <title>运动场馆预约——爱运动</title>
+    
+    <script th:inline="javascript">
+        /*$(document).ready(function() {
+            $("button[id='button']").click(function () {  
+                var sitenum = $("#sitenum").val();
+                var siteprice = $("#siteprice").val();
+                alert(sitenum);
+                if (siteprice == "") {
+                    layui.use('layer', function(){
+                        var layer = layui.layer;
+                        layer.msg('请输入需要修改的价格');
+                    });
+                } else {
+                    var url = "/admin/admin_alert_site";
+                    var args = {"sitenum": sitenum, "siteprice": siteprice};
+                    $.post(url, args, function (data) {
+                        console.log(data);
+                    })
+                    layui.use('layer', function(){
+                        var layer = layui.layer;
+                        layer.msg('数据更新成功');
+                    });
+                }
+            })
+        })*/
+       /* var alert_site=function(info){
+            var sitenum = $("#sitenum").val();
+            var siteprice = $("#siteprice").val();
+            alert(siteprice);
+            /!*if (siteprice == "") {
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+                    layer.msg('请输入需要修改的价格');
+                });
+            } else {
+                var url = "/admin/admin_alert_site";
+                var args = {"sitenum": sitenum, "siteprice": siteprice};
+                $.post(url, args, function (data) {
+                    console.log(data);
+                })
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+                    layer.msg('数据更新成功');
+                });
+            }*!/
+        }*/
+    </script>
+
+    <script>
+        $(function () {
+            $("#add_site_btn").click(function () {
+                var sitenum = $("#add_site_num").val();
+                var siteprice = $("#add_site_price").val();
+                if (sitenum == "" || siteprice == "") {
+                    layer.msg('输入不能为空');
+                    return false;
+                } else {
+                    $.get(
+                        "/admin/admin_add_site",
+                        "sitenum=" + sitenum + "&siteprice=" + siteprice,
+                        function (data) {
+                            if (data != null ) {
+                                layer.msg('添加成功', function () {
+                                    location.reload();
+                                });
+                            } else {
+                                layer.msg('添加失败');
+                            }
+                        }
+                    )
+                }
+            });
+        });
+            layui.use(['upload','jquery'], function(){
+                var $ = layui.jquery
+                    ,upload = layui.upload;
+                //普通图片上传
+                var uploadInst = upload.render({
+                    elem: '#test1'
+                    ,url: '/uploadFile'
+                    ,auto: true
+                    ,bindAction: "#add_site_pic_btn"
+                    ,before: function(obj){
+                        //预读本地文件示例，不支持ie8
+                        obj.preview(function(index, file, result){
+                            $('#demo1').attr('src', result); //图片链接（base64）
+                        });
+                    }
+                    ,done: function(res){
+                        //如果上传失败
+                        if(res.code > 0){
+                            layer.msg('上传失败');
+                        }
+                        //上传成功
+                        layer.msg('上传成功');
+                    }
+                });
+            });
+    </script>
+</head>
+<body>
+
+
+<div class="container">
+    <div class="row">
+        <tr th:each="list:${site_list}">
+            <div class="col-lg-3 col-md-4">
+                <img class="img-responsive" th:src="@{${list.sitepic}}" style="width:200px;height:200px;" />
+                <div class="card-body">
+                    <input type="text" id="sitenum" th:value="${list.sitenum}" hidden/>
+                    <label class="form-inline">场地号：<p class="card-text" th:text="${list.sitenum}" ></p></label>
+                    <label class="form-inline"><p class="card-text" th:text="${list.siteprice}" ></p>元/小时</label>
+                        <!--<input type="text" class="card-text" id="siteprice" th:placeholder="${list.siteprice}" >元/小时-->
+                        <!--<button type="button" id="button"  class="btn btn-primary" >更改</button> -->
+                    <a th:href="@{/admin/admin_select_site(sitename=${list.sitename},sitenum=${list.sitenum},siteprice=${list.siteprice})}" class="btn btn-primary">编辑</a>
+                    <a th:href="@{/admin/admin_delete_site(sitename=${list.sitename},sitenum=${list.sitenum},siteprice=${list.siteprice})}" class="btn btn-danger">删除</a>
+                    <!--<a th:href="@{/admin/admin_alert_site(sitenum=${list.sitenum},siteprice=${list.siteprice})}" class="btn btn-primary">前往更改</a>-->
+                </div>
+            </div>
+            
+        </tr>
+        <div class="col-lg-3 col-md-4">
+            <img src="../../images/加号.jpg" data-toggle="modal" data-target="#addsiteModal" width="200px" height="200px">
+        </div>
+    </div>
+
+    <div class="modal fade" id="addsiteModal" tabindex="-1" role="dialog" aria-labelledby="addsiteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="addsiteModalLabel">添加场地信息</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row justify-content-center">
+                        <div class="align-self-center">
+                            <div class="layui-upload">
+                                <div class="layui-upload">
+                                    <button type="button" class="layui-btn" id="test1">选择图片</button>
+                                    <br>
+                                    <div class="layui-upload-list">
+                                        <img style="width: 200px;height: 200px" id="demo1">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="form-inline">请输入场地号：<input type="text" id="add_site_num"></label>
+                                    <label class="form-inline">请输入价格：<input type="text" id="add_site_price"></label>
+                                    <button type="button" class="layui-btn" id="add_site_btn">添加场地</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+
+
+
+</body>
+</html>

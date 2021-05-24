@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="" th:href="@{/bootstrap-4.3.1-dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="" th:href="@{/Flat-UI-master/dist/css/flat-ui.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/lib/Datatables/css/jquery.dataTables.css}">
+    <script src="" th:src="@{/jquery/jquery-3.4.1.min.js}"></script>
+    <script src="" th:src="@{/bootstrap-4.3.1-dist/js/bootstrap.min.js}"></script>
+    <script src="" th:src="@{/Flat-UI-master/dist/js/vendor/jquery.min.js}"></script>
+    <script src="" th:src="@{/Flat-UI-master/dist/js/flat-ui.min.js}"></script>
+    <script src="" th:src="@{/Layui/laydate/laydate.js}"></script>
+    <script src="../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf8" th:href="@{/lib/Datatables/js/jquery.js}"></script>
+   <!-- <script type="text/javascript" charset="utf8" th:href="@{/lib/Datatables/js/jquery.dataTables.js}"></script>-->
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+    
+    <title>Title</title>
+
+    <script>
+        $(document).ready( function () {
+            $('#table_id_example').DataTable();
+        } );
+
+        function complete_appointment() {
+            if(!confirm("预约完成?")){
+                window.event.returnValue=false;
+            }
+            else{
+                alert('预约成功！');
+            }
+        }
+    </script>
+    <style>
+        
+    </style>
+
+</head>
+<body>
+
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">预约管理</h1>
+    <p class="mb-4">Manage appointment.<a target="_blank" href="https://datatables.net"></a></p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">查看预约情况</h6>
+        </div>
+
+        <div class="card-body">
+            <!--                        <button class="btn btn-sm btn-success">增添</button>-->
+            <div class="table-responsive">
+                <table  id="table_id_example" class="table table-bordered" width="100%" cellspacing="0">
+                    <!-- <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">-->
+                    <thead>
+                    <tr>
+                        <th>邮箱</th>
+                        <th>用户名</th>
+                        <th>场馆名</th>
+                        <th>场地号</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>邮箱</th>
+                        <th>用户名</th>
+                        <th>场馆名</th>
+                        <th>场地号</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <tr th:each="list:${site_list}">
+                        <td th:text="${list.email}"></td>
+                        <td th:text="${list.username}"></td>
+                        <td th:text="${list.sitename_zh}"></td>
+                        <td th:text="${list.sitenum}"></td>
+                        <td th:text="${list.sitedate}+' '+${list.start_time}+' ~ '+${list.end_time}"></td>
+                        <td>
+                            <a th:href="@{/admin/complete_user_appointment(email=${list.email},username=${list.username},sitename=${list.sitename},sitenum=${list.sitenum},sitedate=${list.sitedate},start_time=${list.start_time},end_time=${list.end_time})}" class="btn btn-warning"  onclick="complete_appointment()">预约完成</a>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

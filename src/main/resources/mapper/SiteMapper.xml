@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE mapper
+            PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+            "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Mapper.SiteMapper">
+    <select id="find_sitename_zh" parameterType="String" resultType="Site">
+        select * from sitename
+    </select>
+    
+    <select id="find_site" parameterType="String" resultType="Site">
+        select * from site where sitename=#{kind}
+    </select>
+
+    <select id="find_all_site" resultType="Site">
+        select * from site
+    </select>
+    
+    <select id="get_time"  parameterType="Site" resultType="Site">
+        select * from time where sitename=#{sitename} and sitenum=#{sitenum}
+    </select>
+    
+    <select id="view_my_appointment" parameterType="String" resultType="Site">
+        select * from time where email=#{email} and complete=0
+    </select>
+    
+    <select id="find_user_appointment" resultType="Site">
+        select * from time where complete=0
+    </select>
+
+    <select id="find_user_completed_appointment" resultType="Site">
+        select * from time where complete=1
+    </select>
+    
+    <select id="view_my_completed_appointment" parameterType="String" resultType="Site">
+        select * from time where email=#{email} and complete=1
+    </select>
+    
+    <select id="getnotice"   resultType="Site">
+        select * from notice
+    </select>
+    
+    <select id="get_all_appointment_by_date" resultType="Site">
+        select * from time where sitedate=#{sitedate} and sitename=#{sitename} and  sitenum=#{sitenum}
+    </select>
+
+    <insert id="appoint_site" parameterType="Site">
+        insert into time set indexname=#{indexname} , email=#{email} , username=#{username} , sitename=#{sitename} , sitenum=#{sitenum} , sitedate=#{sitedate} , start_time=#{start_time} , end_time=#{end_time} ,complete=0
+    </insert>
+
+    <insert id="admin_add_site" >
+        insert into site set sitename=#{sitename} , siteprice=#{siteprice} , sitenum=#{sitenum} , sitepic=#{sitepic}
+    </insert>
+
+    <insert id="addgym" >
+        insert into sitename set sitename_zh=#{sitename_zh} , sitename_en=#{sitename_en}
+    </insert>
+    
+    <update id="admin_alert_site">
+        update site set sitenum=#{sitenum} , siteprice=#{siteprice} , sitepic=#{sitepic} where sitename=#{admin_nowsitename} and sitenum=#{admin_nowsitenum}
+    </update>
+
+    <update id="complete_user_appointment">
+        update time set complete=1 where email=#{email} and username=#{username} and sitename=#{sitename} and sitenum=#{sitenum} and sitedate=#{sitedate} and start_time=#{start_time} and end_time=#{end_time}
+    </update>
+    
+    <delete id="admin_delete_site">
+        delete from site where sitename=#{sitename} and sitenum=#{sitenum}
+    </delete>
+    
+    <delete id="deletegym">
+        delete from sitename where sitename_zh=#{sitename_zh} and sitename_en=#{sitename_en}
+    </delete>
+    
+    <delete id="delete_completed_user_appointment">
+        delete from time where email=#{email} and username=#{username} and sitename=#{sitename} and sitenum=#{sitenum} and sitedate=#{sitedate} and start_time=#{start_time} and end_time=#{end_time}
+    </delete>
+    
+</mapper>

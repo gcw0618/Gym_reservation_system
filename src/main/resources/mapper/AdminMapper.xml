@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Mapper.AdminMapper">
+    <select id="checkadminlogin" parameterType="String" resultType="boolean">
+        select count(*) from admin where username=#{username} and password=#{password}
+    </select>
+
+    <select id="get_index_pic" resultType="Picture">
+        select * from home
+    </select>
+
+    <insert id="add_home_pic" >
+        insert into home set pic=#{picture}
+    </insert>
+    
+    <update id="updatepassword" parameterType="String">
+        update admin set password=#{password} where username=#{username}
+    </update>
+
+    <delete id="delete_home_pic">
+        delete from home where pic=#{picture}
+    </delete>
+    
+</mapper>

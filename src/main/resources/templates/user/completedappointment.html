@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="" th:href="@{/bootstrap-4.3.1-dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="" th:href="@{/Flat-UI-master/dist/css/flat-ui.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="../lib/layui-v2.5.5/css/layui.css" media="all">
+    <script src="" th:src="@{/jquery/jquery-3.4.1.min.js}"></script>
+    <script src="" th:src="@{/bootstrap-4.3.1-dist/js/bootstrap.min.js}"></script>
+    <script src="" th:src="@{/Flat-UI-master/dist/js/vendor/jquery.min.js}"></script>
+    <script src="" th:src="@{/Flat-UI-master/dist/js/flat-ui.min.js}"></script>
+    <script src="" th:src="@{/Layui/laydate/laydate.js}"></script>
+    <script src="../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <title>Title</title>
+
+    <script>
+        function delete_my_appointment() {
+            if(!confirm("确认删除?")){
+                window.event.returnValue=false;
+            }
+            else{
+                alert('删除成功');
+            }
+        }
+    </script>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <tr th:each="list:${appointment_list}">
+            <div class="col-lg-3 col-md-4">
+                <div class="card-header">
+                    <p class="card-text" th:text="'场馆：'+${list.sitename_zh}"></p>
+                </div>
+                <div class="card-body">
+                    <p class="card-text" th:text="'场地号：'+${list.sitenum}"></p>
+                    <p class="card-text" th:text="${list.sitedate}"></p>
+                    <p class="card-text" th:text="${list.start_time}+' ~ '+${list.end_time}"></p>
+                   
+                </div>
+            </div>
+        </tr>
+    </div>
+</div>
+
+
+</body>
+</html>
